@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -51,7 +51,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ Auth::user()->avatar }}"/>
+                                    <img src="{{ Auth::user()->avatar }}" style="max-width: 40px;max-height: 40px;" class="rounded-circle">
                                     {{ Auth::user()->nick }} <span class="caret"></span>
                                 </a>
 
@@ -60,6 +60,21 @@
                                     <a class="dropdown-item" href="{{ route('users.edit', ['user' => Auth::id()]) }}">
                                         <i class="fas fa-address-card"></i>
                                         {{ __('Your Profile') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('currency.showGold') }}">
+                                        <i class="fas fa-address-card"></i>
+                                        {{ __('Gold Price') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('currency.showOne') }}">
+                                        <i class="fas fa-address-card"></i>
+                                        {{ __('Currency Rate') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('currency.show') }}">
+                                        <i class="fas fa-address-card"></i>
+                                        {{ __('Your Currency Rates') }}
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -83,5 +98,6 @@
             @yield('content')
         </main>
     </div>
+@yield('scripts')
 </body>
 </html>

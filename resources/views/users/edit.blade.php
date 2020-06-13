@@ -8,6 +8,13 @@
                     <div class="card-header">{{ __('Your Profile') }}</div>
 
                     <div class="card-body">
+                        <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">
+                                {{ __('Delete account') }}
+                            </button>
+                        </form>
                         <form method="POST" action="{{ route('users.edit', ['user' => $user->id]) }}">
                             @csrf
                             @method('PATCH')

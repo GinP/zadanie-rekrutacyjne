@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -48,5 +48,11 @@ class HomeController extends Controller
             'avatar' => 'https://eu.ui-avatars.com/api/?name=' . request()->nick,
         ]);
         return view('users.edit', compact('user'))->with('success', 'Saved succesfully');
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return view('welcome');
     }
 }

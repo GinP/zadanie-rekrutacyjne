@@ -26,4 +26,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/users/@me/edit', 'HomeController@edit')->name('users.edit');
     Route::patch('/users/@me/edit', 'HomeController@update')->name('users.update');
+    Route::delete('/users/{user}','HomeController@destroy')->name('users.destroy');
+
+    Route::get('/currency/show', 'CurrencyController@show')->name('currency.show');
+    Route::patch('/currency/update', 'CurrencyController@update')->name('currency.update');
+
+    Route::get('/currency/showGold', 'CurrencyController@showGold')->name('currency.showGold');
+    Route::get('/currency/showOne', 'CurrencyController@showOne')->name('currency.showOne');
 });
