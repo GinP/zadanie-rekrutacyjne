@@ -19,39 +19,88 @@
                                     <option value="{{ $code }}">{{ $code }}</option>
                                 @endforeach
                             </select>
-                            <input type="text" name="date" value="10-24-1984"/>
+                            <input class="m-4" type="text" name="date" value=""/>
                             <button type="submit" class="btn btn-primary btn-lg btn-block mt-2"> Check rate </button>
                         </form>
                     </div>
                 </div>
-                @if($single_currency != NULL)
-                    <div class="card">
-                        <div class="card-header">
-                            {{ $single_currency['code'] }}
-                        </div>
-                        <div class="card-body">
-                            {{ $single_currency['mid'] }}
-                        </div>
+
+                    <div class="card mt-2">
+                        @if($single_currency != NULL)
+                            <div class="card-header d-flex justify-content-center">
+                                {{ $single_currency['code'] }}
+                            </div>
+                            <div class="card-body">
+                                Rate: {{ $single_currency['mid'] }}
+                                <span class="float-right"> {{ $single_currency['effectiveDate'] }} </span>
+                            </div>
+                        @else
+                            <div class="card-header d-flex justify-content-center">
+                                Check rate
+                            </div>
+                            <div class="card-body">
+                                Choose currency and date
+                            </div>
+                        @endif
                     </div>
-                @endif
+
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
     <script>
+        // $(function() {
+        //     $('input[name="date"]').daterangepicker({
+        //         singleDatePicker: true,
+        //         showDropdowns: true,
+        //         autoApply: true,
+        //         minYear: 1900,
+        //         opens: "center",
+        //         maxYear: parseInt(moment().format('DD-MM-YYYY'),10),
+        //         locale: {
+        //             "format": "MM-DD-YYYY",
+        //             "separator": " - ",
+        //             "applyLabel": "Apply",
+        //             "cancelLabel": "Cancel",
+        //             "fromLabel": "From",
+        //             "toLabel": "To",
+        //             "customRangeLabel": "Custom",
+        //             "weekLabel": "W",
+        //             "daysOfWeek": [
+        //                 "Su",
+        //                 "Mo",
+        //                 "Tu",
+        //                 "We",
+        //                 "Th",
+        //                 "Fr",
+        //                 "Sa"
+        //             ],
+        //             "monthNames": [
+        //                 "January",
+        //                 "February",
+        //                 "March",
+        //                 "April",
+        //                 "May",
+        //                 "June",
+        //                 "July",
+        //                 "August",
+        //                 "September",
+        //                 "October",
+        //                 "November",
+        //                 "December"
+        //             ],
+        //             "firstDay": 1
+        //         },
+        //     });
+        // });
         $(function() {
             $('input[name="date"]').daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                minYear: 2020,
-                startDate: "06/13/2020",
-                endDate: "06/13/2020",
-                opens: "center",
-                maxYear: parseInt(moment().format('DD-MM-YYYY'),10),
-                locale: {
-                    "format": "MM-DD-YYYY",
-                    "separator": " - ",
+                "singleDatePicker": true,
+                "autoApply": true,
+                "locale": {
+                    "format": "YYYY-MM-DD",
+                    "separator": "-",
                     "applyLabel": "Apply",
                     "cancelLabel": "Cancel",
                     "fromLabel": "From",
@@ -83,6 +132,11 @@
                     ],
                     "firstDay": 1
                 },
+                "startDate": "2020-06-13",
+                "endDate": "2020-06-13",
+                "opens": "center"
+            }, function(start, end, label) {
+                console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
             });
         });
     </script>

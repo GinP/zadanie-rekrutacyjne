@@ -73,19 +73,21 @@ class CurrencyController extends Controller
         $currency_all = $response[0]['rates'];
         $codes = [];
         $single_currency = [];
+
         foreach ($currency_all as $currency) {
             $codes[] = $currency['code'];
         }
-        if (request()->date != NULL)
-        {
+
+        if (request()->date != NULL) {
             $request = request()->validate([
                 'code' => 'string|max:3|min:3',
                 'date' => 'date',
             ]);
-            $date = Carbon::createFromFormat('m-d-Y', request()->date)->toDateString();
-            $cUrl = 'http://api.nbp.pl/api/exchangerates/rates/a/'. request()->code .'/'. $date .'/?format=json';
-            if($response = Http::GET($cUrl)->json() != NULL)
-            {
+            
+            $single_currency = ['code' => request()->code, 'mid' => 'No available rate from that day', 'effectiveDate' => 'Date'];
+            $cUrl = 'http://api.nbp.pl/api/exchangerates/rates/a/'. $request['code'] .'/'. $request['date'] .'/?format=json';
+
+            if($response = Http::GET($cUrl)->json() != NULL) {
                 $response = Http::GET($cUrl)->json();
                 $single_currency = $response['rates'][0];
                 $single_currency['code'] = $request['code'];
