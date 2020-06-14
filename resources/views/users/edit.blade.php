@@ -5,21 +5,21 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Your Profile') }}</div>
+                    <div class="card-header">{{ __('msg.profile') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}">
+                        <form method="POST" action="{{ route('users.destroy', ['user' => $user->id]) }}" role="name" aria-label="edit profile form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">
-                                {{ __('Delete account') }}
+                                {{ __('msg.user.delete') }}
                             </button>
                         </form>
                         <form method="POST" action="{{ route('users.edit', ['user' => $user->id]) }}">
                             @csrf
                             @method('PATCH')
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('msg.user.name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
+                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('msg.user.surname') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ $user->surname }}" required autocomplete="surname" autofocus>
@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="nick" class="col-md-4 col-form-label text-md-right">{{ __('Nick') }}</label>
+                                <label for="nick" class="col-md-4 col-form-label text-md-right">{{ __('msg.user.nick') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="nick" type="text" class="form-control @error('nick') is-invalid @enderror" name="nick" value="{{ $user->nick }}" required autocomplete="nick" autofocus>
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('msg.user.email') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
@@ -77,11 +77,11 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Save profile') }}
+                                        {{ __('msg.user.save') }}
                                     </button>
 
                                     <button type="button" onclick="window.location='{{ route("users.password") }}'" class="btn btn-primary">
-                                        {{ __('Change Password') }}
+                                        {{ __('msg.user.chpasswd') }}
                                     </button>
                                 </div>
                             </div>

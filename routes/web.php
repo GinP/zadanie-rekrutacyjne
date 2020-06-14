@@ -34,3 +34,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/currency/showGold', 'CurrencyController@showGold')->name('currency.showGold');
     Route::get('/currency/showOne', 'CurrencyController@showOne')->name('currency.showOne');
 });
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);

@@ -68,25 +68,34 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                            <a href="{{ url('/home') }}" aria-label="login">{{__('msg.home')}}</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }} " aria-label="login">{{__('msg.login')}}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}" aria-label="register">{{__('msg.register')}}</a>
                         @endif
                     @endauth
                 </div>
             @endif
-
             <div class="content">
                 <div class="title m-b-md">
-                    {{__('Zadanie Rekrutacyjne')}}
+                    {{__('msg.task')}}
                 </div>
 
                 <div class="links">
-                    <a href="#">Sławomir</a>
-                    <a href="#">Fliegner</a>
+                    <a href="#" class="" role="link" aria-label="language {{ Config::get('languages')[App::getLocale()] }}">
+                        <i class="fas fa-globe-europe"></i>
+                        {{ Config::get('languages')[App::getLocale()] }}
+                    </a>
+                    @foreach (Config::get('languages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                            <a class="" href="{{ route('lang.switch', $lang) }}" aria-label="language {{$language}}">
+                                <i class="fas fa-globe-europe"></i>
+                                {{$language}}
+                            </a>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>

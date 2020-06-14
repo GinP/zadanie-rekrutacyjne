@@ -15,89 +15,107 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<div id="app">
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" aria-label="Recruitment Task" href="{{ url('/') }}">
+                {{ __('msg.task') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-label="language">
+                            <i class="fas fa-globe-europe"></i>
+                            {{ Config::get('languages')[App::getLocale()] }}
+                        </a>
 
-                    </ul>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}">
+                                        <i class="fas fa-globe-europe"></i>
+                                        {{$language}}
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </li>
+                </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ Auth::user()->avatar }}" style="max-width: 40px;max-height: 40px;" class="rounded-circle">
-                                    {{ Auth::user()->nick }} <span class="caret"></span>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle font-weight-bold" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <img src="{{ Auth::user()->avatar }}" style="max-width: 40px;max-height: 40px;" class="rounded-circle">
+                                {{ Auth::user()->nick }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item" href="{{ route('users.edit', ['user' => Auth::id()]) }}">
+                                    <i class="fas fa-address-card"></i>
+                                    {{ __('msg.profile') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('currency.showGold') }}">
+                                    <i class="fas fa-balance-scale"></i>
+                                    {{ __('msg.gold') }}
+                                </a>
 
-                                    <a class="dropdown-item" href="{{ route('users.edit', ['user' => Auth::id()]) }}">
-                                        <i class="fas fa-address-card"></i>
-                                        {{ __('Your Profile') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('currency.showOne') }}">
+                                    <i class="fas fa-money-bill-alt"></i>
+                                    {{ __('msg.currency') }}
+                                </a>
 
-                                    <a class="dropdown-item" href="{{ route('currency.showGold') }}">
-                                        <i class="fas fa-address-card"></i>
-                                        {{ __('Gold Price') }}
-                                    </a>
+                                <a class="dropdown-item" href="{{ route('currency.show') }}">
+                                    <i class="fas fa-coins"></i>
+                                    {{ __('msg.your_currency') }}
+                                </a>
 
-                                    <a class="dropdown-item" href="{{ route('currency.showOne') }}">
-                                        <i class="fas fa-address-card"></i>
-                                        {{ __('Currency Rate') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('currency.show') }}">
-                                        <i class="fas fa-address-card"></i>
-                                        {{ __('Your Currency Rates') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                    <i class="fas fa-power-off"></i>
+                                    {{ __('msg.logout') }}
+                                </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
 @yield('scripts')
 </body>
 </html>

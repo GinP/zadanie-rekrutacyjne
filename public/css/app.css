@@ -11338,3 +11338,47 @@ a.text-dark:focus {
   }
 }
 
+navbar {
+  background-color: goldenrod;
+}
+
+.btn-primary {
+  background-color: #1b1e21;
+  border-color: #000000;
+}
+
+.btn-primary:active,
+.btn-primary:hover,
+.btn-primary:focus-within,
+.btn-primary:focus,
+.btn-primary:focus:hover:active:focus-within:visited,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+  background-color: gray;
+  border-color: #000000;
+  box-shadow: 0 0 0 0.2rem rgba(27, 30, 33, 0.25);
+}
+
+.dropdown-item:active {
+  background-color: #1b1e21;
+}
+
+.custom-select:active,
+.custom-select:focus {
+  border-color: #000000;
+  box-shadow: 0 0 0 0.2rem rgba(27, 30, 33, 0.25);
+}
+
+.card-header {
+  color: white;
+  background-color: #1b1e21;
+  border-color: #000000;
+}
+
+.form-control:focus,
+.form-control:hover,
+.form-control:active {
+  border-color: #1b1e21;
+  box-shadow: 0 0 0 0.2rem rgba(27, 30, 33, 0.25);
+}
+

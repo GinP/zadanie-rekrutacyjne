@@ -26,6 +26,7 @@
         "@chenfengyuan/datepicker": "^1.0.9",
         "chart.js": "^2.9.3",
         "daterangepicker": "github:dangrossman/daterangepicker",
+        "fontawesome": "^5.6.3",
         "moment": "^2.26.0"
     }
 }

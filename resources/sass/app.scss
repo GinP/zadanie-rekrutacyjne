@@ -9,3 +9,40 @@
 
 @import '~daterangepicker/daterangepicker.css';
 @import '~chart.js/dist/Chart.min.css';
+$global-black: #000000;
+$global-dark: #1b1e21;
+$rgb-global-dark: rgba(27, 30, 33, 0.25);
+navbar{
+    background-color: goldenrod;
+}
+.btn-primary{
+    background-color: $global-dark;
+    border-color: $global-black;
+    &:active, &:hover, &:focus-within, &:focus, &:focus:hover:active:focus-within:visited, &:not(:disabled):not(.disabled):active, &:not(:disabled):not(.disabled):active:focus{
+        background-color: gray;
+        border-color: $global-black;
+        box-shadow: 0 0 0 0.2rem $rgb-global-dark;
+    };
+}
+.dropdown-item{
+    &:active{
+        background-color: $global-dark;
+    }
+}
+.custom-select{
+    &:active, &:focus{
+        border-color: $global-black;
+        box-shadow: 0 0 0 0.2rem $rgb-global-dark;
+    }
+}
+.card-header{
+    color:white;
+    background-color: $global-dark;
+    border-color: $global-black;
+}
+.form-control{
+    &:focus, &:hover, &:active{
+        border-color: $global-dark;
+        box-shadow: 0 0 0 0.2rem $rgb-global-dark;
+    }
+}

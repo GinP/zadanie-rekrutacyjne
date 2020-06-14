@@ -5,10 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card mb-2">
-                    <div class="card-header">{{ __('Currency Rates') }}</div>
+                    <div class="card-header">{{ __('msg.ycurrency.rates') }}</div>
 
                     <div class="card-body mb-2">
-                        <form method="POST" action="{{ route('currency.update') }}">
+                        <form method="POST" action="{{ route('currency.update') }}" role="name" aria-label="get your currency rates form">
                             @csrf
                             @method('PATCH')
 
@@ -18,19 +18,19 @@
                                     <label class="form-check-label" for="inlineCheckbox{{ $key }}">{{ $currency['code'] }}</label>
                                 </div>
                             @endforeach
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Save currency rates</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{__('msg.ycurrency.save')}}</button>
                         </form>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Your Currency Rates') }}</div>
+                    <div class="card-header">{{ __('msg.ycurrency.your') }}</div>
                     <div class="card-body d-flex justify-content-center flex-wrap">
                         @forelse($user_currency as $key => $currency)
                             <div class="col-lg-2">
                                 <div class="card m-1 float-left">
                                     <div class="card-header">
-                                        Rate {{ $user_currency[$key]['code'] }}
+                                        {{__('msg.ycurrency.rate')}} {{ $user_currency[$key]['code'] }}
                                     </div>
                                     <div class="card-body p-1">
                                         <div class="card-text text-center">{{ $user_currency[$key]['mid'] }}</div>
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         @empty
-                            <p>Any Currency checked</p>
+                            <p>{{__('msg.ycurrency.any')}}</p>
                         @endforelse
                     </div>
                 </div>

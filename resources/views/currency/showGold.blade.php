@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-center">
-                        Gold Prices of last 10 days
+                        {{__('msg.sgold.title')}}
                     </div>
                     <div class="card-body">
                         <canvas id="myChart" width="400" height="400"></canvas>

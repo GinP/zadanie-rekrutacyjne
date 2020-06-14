@@ -45,7 +45,7 @@ class HomeController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
         ]));
         $user->update([
-            'avatar' => 'https://eu.ui-avatars.com/api/?name=' . request()->nick,
+            'avatar' => 'https://eu.ui-avatars.com/api/?color=ffffff&background=1b1e21&bold=true&name=' . request()->nick,
         ]);
         return view('users.edit', compact('user'))->with('success', 'Saved succesfully');
     }
@@ -53,6 +53,6 @@ class HomeController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return view('welcome');
+        return redirect()->route('home');
     }
 }
