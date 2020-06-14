@@ -57,13 +57,13 @@ class CurrencyController extends Controller
 
     public function showGold()
     {
-        $now = Carbon::now();
-        $start = $now->subDays(10)->toDateString();
-        $end = $now->toDateString();
+        $now =
+        $start = Carbon::now('Europe/Warsaw')->subDays(10)->toDateString();
+        $end = Carbon::now('Europe/Warsaw')->toDateString();
         $gUrl = 'http://api.nbp.pl/api/cenyzlota/'. $start .'/'. $end .'/?format=json';
         $response = Http::GET($gUrl)->json();
-
-        return view('currency.showGold', ['gold_price' => $response]);
+        $collection = collect($response);
+        return view('currency.showGold', ['gold_price' => $collection]);
     }
 
     public function showOne()
@@ -83,12 +83,10 @@ class CurrencyController extends Controller
                 'code' => 'string|max:3|min:3',
                 'date' => 'date',
             ]);
-            
+
             $single_currency = ['code' => request()->code, 'mid' => 'No available rate from that day', 'effectiveDate' => 'Date'];
             $cUrl = 'http://api.nbp.pl/api/exchangerates/rates/a/'. $request['code'] .'/'. $request['date'] .'/?format=json';
-
-            if($response = Http::GET($cUrl)->json() != NULL) {
-                $response = Http::GET($cUrl)->json();
+            if($response = Http::GET($cUrl)->json()) {
                 $single_currency = $response['rates'][0];
                 $single_currency['code'] = $request['code'];
             }

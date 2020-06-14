@@ -50,50 +50,6 @@
 @endsection
 @section('scripts')
     <script>
-        // $(function() {
-        //     $('input[name="date"]').daterangepicker({
-        //         singleDatePicker: true,
-        //         showDropdowns: true,
-        //         autoApply: true,
-        //         minYear: 1900,
-        //         opens: "center",
-        //         maxYear: parseInt(moment().format('DD-MM-YYYY'),10),
-        //         locale: {
-        //             "format": "MM-DD-YYYY",
-        //             "separator": " - ",
-        //             "applyLabel": "Apply",
-        //             "cancelLabel": "Cancel",
-        //             "fromLabel": "From",
-        //             "toLabel": "To",
-        //             "customRangeLabel": "Custom",
-        //             "weekLabel": "W",
-        //             "daysOfWeek": [
-        //                 "Su",
-        //                 "Mo",
-        //                 "Tu",
-        //                 "We",
-        //                 "Th",
-        //                 "Fr",
-        //                 "Sa"
-        //             ],
-        //             "monthNames": [
-        //                 "January",
-        //                 "February",
-        //                 "March",
-        //                 "April",
-        //                 "May",
-        //                 "June",
-        //                 "July",
-        //                 "August",
-        //                 "September",
-        //                 "October",
-        //                 "November",
-        //                 "December"
-        //             ],
-        //             "firstDay": 1
-        //         },
-        //     });
-        // });
         $(function() {
             $('input[name="date"]').daterangepicker({
                 "singleDatePicker": true,
